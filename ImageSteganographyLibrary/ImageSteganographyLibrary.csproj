@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinaryEmbedFiles\BinaryEmbed.cs" />
+    <Compile Include="BinaryEmbedFiles\BinaryEmbedStruct.cs" />
     <Compile Include="BinaryEmbedFiles\FileZipper.cs" />
     <Compile Include="ColorEmbedFiles\ColorDataExtractor.cs" />
     <Compile Include="ColorEmbedFiles\ColorEmbed.cs" />
