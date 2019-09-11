@@ -29,4 +29,4 @@ For the Binary Embed algorithm, a **'Carrier Image'** is chosen and file(s)/dire
 A payload text is typed out as well as a 'secret' text. The **'secret'** is converted into binary and it's 1's are converted to a **zero-width space (\u200B)**, the 0's are converted to a **zero-width non-joiner (\u200C)**. The letters are separated by a **zero-width joiner (\u200D)** and each word is distinguished by a **zero-width non-breaking space (\uFEFF)** and the zero-width string is returned and appended to the Payload text.
 
 ## YouTube Demo ##
-https://youtu.be/7XQtG-kjcLY
+[IConceal Demo Video](https://youtu.be/7XQtG-kjcLY)
