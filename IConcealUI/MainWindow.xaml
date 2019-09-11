@@ -1,0 +1,215 @@
+﻿<Window x:Class="IConcealUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IConcealUI"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
+        ResizeMode="NoResize"
+        Title="IConceal" Height="450" Width="800"
+        FontFamily="Roboto Light"
+        BorderThickness="0, 1, 0, 0"
+        BorderBrush="SaddleBrown"
+        Loaded="Window_Loaded">
+    <Grid Background="#1d1d1d">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+
+
+        <!--Logo-->
+        <WrapPanel Grid.Column="1" HorizontalAlignment="Right">
+            <TextBlock Text="IConceal" 
+                   FontFamily="Roboto" FontSize="50" FontWeight="Light"
+                   Foreground="DimGray"
+                   VerticalAlignment="Center"/>
+
+            <Image Source="Icons/cealicon.png" Width="100" Height="100"/>
+        </WrapPanel>
+
+        <!--Tab Navigation-->
+        <WrapPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <TextBlock Text="Image" Style="{StaticResource TabControlTextBlock}"/>
+            <TextBlock Text="Text" Style="{StaticResource TabControlTextBlock}"/>
+            <TextBlock Text="Colour" Style="{StaticResource TabControlTextBlock}"/>
+            <TextBlock Text="Audio" Style="{StaticResource TabControlTextBlock}"/>
+        </WrapPanel>
+
+        <Rectangle Name="TopPanel"  Grid.ColumnSpan="3" MouseDown="TopPanel_MouseDown" Fill="#1d1d1d" Height="30" VerticalAlignment="Top"/>
+
+        <TabControl Grid.Column="1" Grid.Row="1" Background="Transparent" Padding="0" Margin="0, -2, 0, 0" BorderBrush="#1d1d1d"
+                    Name="MainTabControl" x:FieldModifier="public">
+            <TabItem Header="Image" Visibility="Visible">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Image Concealer" Style="{StaticResource TabControlHeaders}"
+                               Grid.Column="1"/>
+
+                    <!--Image Selection-->
+                    <TextBlock Text="Select an Image" Style="{StaticResource Labels}"
+                               Grid.Column="0" Grid.Row="1"/>
+                    <TextBox Grid.Column="0" Grid.Row="2" Name="ImagePath" IsEnabled="False"
+                             Style="{StaticResource FlatInputBox}"
+                             Height="20" VerticalAlignment="Center"
+                             Foreground="#eff4ff"
+                             TextAlignment="Center"
+                             CaretBrush="#efefef"/>
+                    <Button Content="Browse Images"
+                            Grid.Column="0" Grid.Row="2" Width="200" Height="20" VerticalAlignment="Bottom"
+                            Style="{StaticResource FlatButton}"
+                            Foreground="#b91d47" BorderBrush="#b91d47" Background="#1d1d1d"
+                            PreviewMouseDown="SelectImage"/>
+                    <Border Name="ImageBorder" Grid.Row="3" HorizontalAlignment="Left" Width="100" Height="100"
+                            BorderBrush="#efefef" BorderThickness="1"
+                            Visibility="Hidden">
+                        <Image Name="SelectedImage" Width="100" Height="100"
+                           Grid.Column="0" Grid.Row="3"
+                           HorizontalAlignment="Left"
+                           Stretch="Fill"></Image>
+                    </Border>
+                    <StackPanel Grid.Row="3" Orientation="Vertical" Width="100" VerticalAlignment="Center"
+                                Margin="100, 0, 0, 0">
+                        <TextBlock Name="ImageName" Grid.Row="3" Foreground="White"
+                               TextWrapping="Wrap"/>
+                    </StackPanel>
+
+
+                    <!--File Selection-->
+                    <TextBlock Text="Select your Files/Folders" Style="{StaticResource Labels}"
+                               Grid.Row="1" Grid.Column="1"/>
+                    <TextBox Grid.Column="1" Grid.Row="2" Name="FilesPath" IsEnabled="False"
+                             Style="{StaticResource FlatInputBox}"
+                             Height="20" VerticalAlignment="Center"
+                             Foreground="#eff4ff"
+                             TextAlignment="Center"
+                             CaretBrush="#efefef"/>
+                    <Button Content="Browse Files"
+                            Grid.Column="1" Grid.Row="2" Width="200" Height="20" VerticalAlignment="Bottom"
+                            Style="{StaticResource FlatButton}"
+                            Foreground="#00aba9" BorderBrush="#00aba9" Background="#1d1d1d"
+                            PreviewMouseDown="SelectFiles"/>
+                    <WrapPanel Grid.Column="1" Grid.Row="3" Margin="20, 20" Width="100" VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <RadioButton Grid.Column="1" Grid.Row="3" Content="File(s)" Name="FilesRadioButton"
+                                 Style="{StaticResource StandardRadioButton}"/>
+                        <RadioButton Grid.Column="1" Grid.Row="3" Content="Folder" Name="DirectoryRadioButton"
+                                 Style="{StaticResource StandardRadioButton}"/>
+                    </WrapPanel>
+
+                    <TextBlock Text="Save and Encrypt" Style="{StaticResource Labels}"
+                               Grid.Column="2" Grid.Row="1"/>
+                    <TextBox Grid.Column="2" Grid.Row="2" IsEnabled="False"
+                             Style="{StaticResource FlatInputBox}"
+                             Height="20" VerticalAlignment="Center"
+                             Foreground="#eff4ff"
+                             TextAlignment="Center"
+                             CaretBrush="#efefef"/>
+                    <Button Content="Save/Encrypt"
+                            Grid.Column="2" Grid.Row="2" Width="200" Height="20" VerticalAlignment="Bottom"
+                            Style="{StaticResource FlatButton}"
+                            Foreground="#603cba" BorderBrush="#603cba" Background="#1d1d1d"
+                            PreviewMouseDown="Encrypt"/>
+                    <CheckBox Name="PasswordProtectCheckBox" Grid.Column="2" Grid.Row="3" Content="Password Protected" Style="{StaticResource FlatCheckBox}"
+                              VerticalAlignment="Top" HorizontalAlignment="Center" Margin="20, 20" Checked="PasswordProtectCheckBox_Checked" Unchecked="PasswordProtectCheckBox_Unchecked"/>
+                    <PasswordBox Name="ZipArchivePassword" Style="{StaticResource FlatPasswordBox}" 
+                                 Grid.Column="2" Grid.Row="3" Height="20"
+                                 Visibility="Hidden"
+                                 CaretBrush="#efefef"/>
+
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Text" Visibility="Visible">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Image Concealer" Style="{StaticResource TabControlHeaders}"
+                               Grid.Column="0" Grid.ColumnSpan="2"/>
+
+                    <!--Encode Section-->
+                    <TextBlock Text="Encode" Style="{StaticResource Labels}"
+                               Grid.Column="0" Grid.Row="1" VerticalAlignment="Top"/>
+
+                    <!--Payload Text-->
+                    <WrapPanel Grid.Row="1" Height="100" VerticalAlignment="Bottom">
+                        <TextBlock Text="Enter Normal Message" Style="{StaticResource Labels}" FontSize="15"
+                                   Margin="0, 0, 0, 10"/>
+                        <TextBox Name="CarrierTextArea" Style="{StaticResource TextArea}"
+                             Background="#1d1d1d" Foreground="#eff4ff" CaretBrush="#eff4ff"/>
+                    </WrapPanel>
+
+                    <!--Secret Text-->
+                    <WrapPanel Grid.Row="2" Height="135" VerticalAlignment="Bottom">
+                        <TextBlock Text="Enter Secret Message" Style="{StaticResource Labels}" FontSize="15"
+                                   Margin="0, 0, 0, 10"/>
+
+                        <Button Content="Encode" Margin="90, 10, 0, 10" Style="{StaticResource FlatButton}"
+                            Foreground="#eff4ff" BorderBrush="#eff4ff" Background="#1d1d1d" Width="70"
+                                PreviewMouseDown="EncodeTextMessage"/>
+
+                        <TextBox Name="SecretTextArea" Style="{StaticResource TextArea}"
+                             Background="#1d1d1d" Foreground="#00aba9" CaretBrush="#00aba9"/>
+                    </WrapPanel>
+                    
+                    
+                    <!--Decode Section-->
+                    <TextBlock Text="Decode" Style="{StaticResource Labels}"
+                               Grid.Column="1" Grid.Row="1" VerticalAlignment="Top"/>
+
+                    <WrapPanel Grid.Row="1" Grid.Column="1" Height="100" VerticalAlignment="Bottom">
+                        <TextBlock Text="Paste Encoded Message" Style="{StaticResource Labels}" FontSize="15"
+                                   Margin="0, 0, 0, 10"/>
+                        <Button Content="Decode" Margin="70, 10, 0, 0" Style="{StaticResource FlatButton}"
+                            Foreground="#eff4ff" BorderBrush="#eff4ff" Background="#1d1d1d" Width="70"
+                                PreviewMouseDown="DecodeTextMessage"/>
+                        <TextBox Name="PayloadTextArea" Style="{StaticResource TextArea}"
+                             Background="#1d1d1d" Foreground="#eff4ff" CaretBrush="#eff4ff"/>
+                    </WrapPanel>
+
+
+                    <WrapPanel Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" Height="120">
+                        <TextBlock Name="OutputTextAreaTextBlock" Text="                        " Style="{StaticResource Labels}" FontSize="15"
+                                   Margin="0, 0, 0, 10"/>
+                        <TextBox Name="OutputTextArea" Style="{StaticResource TextArea}"
+                             Background="#1d1d1d" Foreground="#eff4ff" CaretBrush="#eff4ff"/>
+                    </WrapPanel>
+
+
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+
+    </Grid>
+</Window>
